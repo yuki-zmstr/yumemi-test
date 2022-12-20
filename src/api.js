@@ -8,18 +8,20 @@ const instance = axios.create({
   },
 });
 
-function getPrefectures() {
+export function getPrefectures() {
   return instance({
     method: "GET",
     url: "/api/v1/prefectures",
   });
 }
 
-function getGraphs() {
+export function getGraphs() {
   return instance({
     method: "GET",
     url: "api/v1/population/composition/perYear",
+    params: {
+      prefCode: 10,
+      cityCode: "-",
+    },
   });
 }
-
-export default getPrefectures;

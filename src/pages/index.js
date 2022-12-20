@@ -1,4 +1,4 @@
-import getPrefectures from "../api";
+import { getPrefectures, getGraphs } from "../api";
 import React, { useState } from "react";
 import {
   LineChart,
@@ -17,14 +17,13 @@ function IndexPage() {
   const [prefectures, setPrefectures] = useState("");
   const [message, setMessage] = useState("");
 
-  function fetchData(e) {
+  function drawGraph(e) {
     e.preventDefault();
 
     setMessage("Loading...");
-    getPrefectures()
+    getGraphs()
       .then((response) => {
-        console.log(response.data.result);
-        setResponseData(response.data.result);
+        setResponseData(response.data.result.data[0].data);
         setMessage("");
       })
       .catch((error) => {
@@ -51,18 +50,37 @@ function IndexPage() {
         株式会社ゆめみ入社試験
       </h1>
       <h2>都道府県別人口推移</h2>
-      <form onSubmit={fetchData}>
+      <form onSubmit={drawGraph}>
         <fieldset>
-          <legend>Get All Prefectures</legend>
-          <button type="submit">Get</button>
+          <legend>描画</legend>
+          <button type="submit">描画する</button>
         </fieldset>
       </form>
       <p>{message}</p>
-      <p>都道府県</p>
       <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
-      {responseData.map(({ prefCode, prefName }) => (
+      {/* {responseData.map(({ prefCode, prefName }) => (
         <div>{prefName}</div>
-      ))}
+      ))} */}
+      <LineChart
+        width={900}
+        height={500}
+        data={responseData}
+        margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
+      >
+        <YAxis tickCount={10} type="number" width={80}>
+          <Label value="人口" position="insideLeft" angle={270} />
+        </YAxis>
+        <Tooltip />
+        <XAxis
+          padding={{ left: 5, right: 5 }}
+          tickCount={10}
+          angle={-60}
+          height={90}
+          dataKey="year"
+        />
+        <CartesianGrid stroke="#f5f5f5" />
+        <Line type="monotone" dataKey="value" stroke="#ff7300" yAxisId={0} />
+      </LineChart>
     </div>
   );
 }
