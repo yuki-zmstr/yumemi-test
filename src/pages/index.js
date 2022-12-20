@@ -23,6 +23,7 @@ function IndexPage() {
       .then((response) => {
         setResponseData(response.data);
         setMessage("");
+        console.log(response);
       })
       .catch((error) => {
         setMessage("Error");
