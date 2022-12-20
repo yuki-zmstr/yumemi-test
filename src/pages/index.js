@@ -1,4 +1,4 @@
-import stockTimeSeries from "../api";
+import getPrefectures from "../api";
 import React, { useState } from "react";
 import {
   LineChart,
@@ -13,19 +13,19 @@ import {
 import logo from "../../favicon.ico";
 
 function IndexPage() {
-  const [responseData, setResponseData] = useState("");
-  const [ticker, setTicker] = useState("");
+  const [responseData, setResponseData] = useState([]);
+  const [prefectures, setPrefectures] = useState("");
   const [message, setMessage] = useState("");
 
   function fetchData(e) {
     e.preventDefault();
 
     setMessage("Loading...");
-    stockTimeSeries(ticker)
+    getPrefectures()
       .then((response) => {
-        setResponseData(response.data);
+        console.log(response.data.result);
+        setResponseData(response.data.result);
         setMessage("");
-        console.log(response);
       })
       .catch((error) => {
         setMessage("Error");
@@ -40,9 +40,6 @@ function IndexPage() {
         fontFamily: '"Lucida Console", Monaco, monospace',
       }}
     >
-      <head className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </head>
       <h1
         style={{
           background: "black",
@@ -51,53 +48,21 @@ function IndexPage() {
           display: "inline-block",
         }}
       >
-        Gatsby Stock Market App
+        株式会社ゆめみ入社試験
       </h1>
-      <h2>Analyze Stock Data</h2>
+      <h2>都道府県別人口推移</h2>
       <form onSubmit={fetchData}>
         <fieldset>
-          <legend>Search Stock Market</legend>
-          <label htmlFor="ticker">
-            Enter stock ticker
-            <input
-              required
-              name="ticker"
-              id="ticker"
-              type="text"
-              placeholder="SPY"
-              value={ticker}
-              onChange={(e) => {
-                setTicker(e.target.value);
-              }}
-            />
-          </label>
-          <button type="submit">Submit</button>
+          <legend>Get All Prefectures</legend>
+          <button type="submit">Get</button>
         </fieldset>
       </form>
       <p>{message}</p>
-      <h3>Symbol: {responseData ? responseData.symbol : ""}</h3>
-      <p>Daily Time Series with Splits and Dividend Events</p>
-      <small>Last Refresh: {responseData ? responseData.refreshed : ""}</small>
-      <LineChart
-        width={900}
-        height={500}
-        data={responseData.closePrices}
-        margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
-      >
-        <YAxis tickCount={10} type="number" width={80}>
-          <Label value="Close Price" position="insideLeft" angle={270} />
-        </YAxis>
-        <Tooltip />
-        <XAxis
-          padding={{ left: 5, right: 5 }}
-          tickCount={10}
-          angle={-60}
-          height={90}
-          dataKey="date"
-        />
-        <CartesianGrid stroke="#f5f5f5" />
-        <Line type="monotone" dataKey="close" stroke="#ff7300" yAxisId={0} />
-      </LineChart>
+      <p>都道府県</p>
+      <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
+      {responseData.map(({ prefCode, prefName }) => (
+        <div>{prefName}</div>
+      ))}
     </div>
   );
 }
