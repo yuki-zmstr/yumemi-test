@@ -1,5 +1,5 @@
 import { getPrefectures, getGraphs } from "../api";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   XAxis,
@@ -14,14 +14,27 @@ import logo from "../../favicon.ico";
 
 function IndexPage() {
   const [responseData, setResponseData] = useState([]);
-  const [prefectures, setPrefectures] = useState("");
+  const [prefectures, setPrefectures] = useState([]);
   const [message, setMessage] = useState("");
+
+  useEffect(
+    () =>
+      getPrefectures()
+        .then((response) => {
+          console.log(response.data.result);
+          setPrefectures(response.data.result);
+        })
+        .catch((error) => {
+          setMessage("Error");
+          console.error(error);
+        }),
+    []
+  );
 
   function drawGraph(e) {
     e.preventDefault();
-
     setMessage("Loading...");
-    getGraphs()
+    getGraphs(10)
       .then((response) => {
         setResponseData(response.data.result.data[0].data);
         setMessage("");
@@ -52,15 +65,22 @@ function IndexPage() {
       <h2>都道府県別人口推移</h2>
       <form onSubmit={drawGraph}>
         <fieldset>
+          <legend>都道府県</legend>
+          {prefectures.map(({ prefCode, prefName }) => (
+            <div>
+              <input type="checkbox" id={prefCode} value={prefName} />
+              <label for={prefCode}>{prefName}</label>
+            </div>
+          ))}
+        </fieldset>
+        <fieldset>
           <legend>描画</legend>
           <button type="submit">描画する</button>
         </fieldset>
       </form>
       <p>{message}</p>
       <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
-      {/* {responseData.map(({ prefCode, prefName }) => (
-        <div>{prefName}</div>
-      ))} */}
+
       <LineChart
         width={900}
         height={500}

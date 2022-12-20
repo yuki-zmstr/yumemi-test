@@ -15,12 +15,12 @@ export function getPrefectures() {
   });
 }
 
-export function getGraphs() {
+export function getGraphs(prefcode) {
   return instance({
     method: "GET",
     url: "api/v1/population/composition/perYear",
     params: {
-      prefCode: 10,
+      prefCode: prefcode,
       cityCode: "-",
     },
   });
