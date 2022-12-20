@@ -10577,9 +10577,8 @@ __webpack_require__.r(__webpack_exports__);
 const instance = axios__WEBPACK_IMPORTED_MODULE_0__["default"].create({
   baseURL: "https://opendata.resas-portal.go.jp",
   headers: {
-    "content-type": "application/octet-stream",
-    "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-    "x-rapidapi-key": ({}).RAPIDAPI_KEY
+    "content-type": "application/json;charset=UTF-8",
+    "X-API-KEY": "35naz1048VQZBIzugAQRY0Ihr9AuZs11SakRebrG"
   }
 });
 async function stockTimeSeries(symbol) {
@@ -10639,13 +10638,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./src/api.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/chart/LineChart.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/YAxis.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/component/Label.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/component/Tooltip.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/XAxis.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/CartesianGrid.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/Line.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/chart/LineChart.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/YAxis.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/component/Label.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/component/Tooltip.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/XAxis.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/CartesianGrid.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/cartesian/Line.js");
+/* harmony import */ var _favicon_ico__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../favicon.ico */ "./favicon.ico");
+
 
 
 
@@ -10668,6 +10669,7 @@ function IndexPage() {
     (0,_api__WEBPACK_IMPORTED_MODULE_0__["default"])(ticker).then(response => {
       setResponseData(response.data);
       setMessage("");
+      console.log(response);
     }).catch(error => {
       setMessage("Error");
       console.error(error);
@@ -10679,7 +10681,13 @@ function IndexPage() {
       padding: "5%",
       fontFamily: '"Lucida Console", Monaco, monospace'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("header", {
+    className: "App-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+    src: _favicon_ico__WEBPACK_IMPORTED_MODULE_2__["default"],
+    className: "App-logo",
+    alt: "logo"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", {
     style: {
       background: "black",
       color: "white",
@@ -10702,7 +10710,7 @@ function IndexPage() {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     type: "submit"
-  }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h3", null, "Symbol: ", responseData ? responseData.symbol : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "Daily Time Series with Splits and Dividend Events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, "Last Refresh: ", responseData ? responseData.refreshed : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_2__.LineChart, {
+  }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h3", null, "Symbol: ", responseData ? responseData.symbol : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "Daily Time Series with Splits and Dividend Events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, "Last Refresh: ", responseData ? responseData.refreshed : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_3__.LineChart, {
     width: 900,
     height: 500,
     data: responseData.closePrices,
@@ -10712,15 +10720,15 @@ function IndexPage() {
       left: 10,
       bottom: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_3__.YAxis, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_4__.YAxis, {
     tickCount: 10,
     type: "number",
     width: 80
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_4__.Label, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_5__.Label, {
     value: "Close Price",
     position: "insideLeft",
     angle: 270
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_5__.Tooltip, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_6__.XAxis, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_6__.Tooltip, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_7__.XAxis, {
     padding: {
       left: 5,
       right: 5
@@ -10729,9 +10737,9 @@ function IndexPage() {
     angle: -60,
     height: 90,
     dataKey: "date"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_7__.CartesianGrid, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_8__.CartesianGrid, {
     stroke: "#f5f5f5"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_8__.Line, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(recharts__WEBPACK_IMPORTED_MODULE_9__.Line, {
     type: "monotone",
     dataKey: "close",
     stroke: "#ff7300",
@@ -67042,6 +67050,21 @@ module.exports = {
 	stderr: getSupportLevel(process.stderr)
 };
 
+
+/***/ }),
+
+/***/ "./favicon.ico":
+/*!*********************!*\
+  !*** ./favicon.ico ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("data:image/vnd.microsoft.icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAACMuAAAjLgAAAAAAAAAAAAD//////////////////////////////////////////////////////////////////////////////////vz///78//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////njwP/216X////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9+fD/7bJN/+mlLf/78d3///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////XXof/lmg7/45oJ//DLfP///v3////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////88+P/6a46/+OcCv/joA3/5a0n//jryf/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+//HPh//joA7/46MQ/+KnE//hqRL/68lm//789v/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9+vL/6bhI/+KkDv/iqRX/4awX/+GvGP/itST/9ee0/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v/w04j/4awW/+GvGP/gshv/4LUd/9+3HP/my1X//Pnr//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v14//mwEX/4LMZ/+C3Hv/fuiD/370i/97BJ//w5Jz///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Pjp//guyX/370h/97AJP/ewyb/3cYn/+LRSf/5993//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////fvx/+jRY//ewSP/3sUo/93IKv/dyyz/3M4t/+vlif///vz/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9u/E/9/LOP/cyyv/3M0u/9zQMP/b0jD/3tlG//f31f/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+/vr/6uGC/9zPLv/c0jH/29Qy/9vWNP/a2TT/6+yU///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////599r/4NlN/9vVMv/a2TX/2ts3/9ncNv/h5mT//P3y/////////////////////////////////////////////////////////////////////////////////////////////P7y//X6zv/u96//7Pak/+74rv/5/eb////////////u7J//2to4/9rcOP/Z3zr/2eE6/93nU//5++L//////////////////////////////////////////////////////////////////////////////////v76//L2v//i7W//2upK/9jqQv/X60H/3O9Z//f83P////////////v76v/i5WT/2eA5/9njPf/Y5T7/3OpV//n74f////////////////////////////////////////////////////////////////////////////7++//u8KX/2+NH/9jkO//Y5j//2OhA/9jqQv/r9aH////+//////////////////H1uf/Z5UT/2OY//9joP//f7WT/+/3u////////////////////////////////////////////////////////////////////////////8vG2/9zdQv/Z3Tj/2eA7/9njPf/Y5Dz/4Otl//r96f///////////////////////f71/+Tvff/Y6T//1+pA/+fzjf////3///////////////////////////////////////////////////////////////////////n43v/g21P/2tcz/9raNv/a3Dj/2d85/9riQf/w9LX/////////////////////////////////9frR/9rtUf/a7lH/9fvQ///////////////////////////////////////////////////////////////////////+/vv/6+OF/9zRL//b0zL/29Yz/9vYNf/a2jT/5edz//399P/////////////////////////////////+//z/6faZ/+r3n//+//z///////////////////////////////////////////////////////////////////////bwxv/fzTr/3Mws/9zPL//b0jH/29Qy/93ZQv/19Mj////////////////////////////////////////////8/vL//f72///////////////////////////////////////////////////////////////////////9+/L/6NNm/97DJf/dxyn/3cos/9zNLv/c0C7/6uWF//7++/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////PkrP/gvSf/3r4j/97CJf/exSj/3cgo/+HSSP/59tr///////7/+//7/ev/+v3p//r86P/6/Oj/+vvo//v75//7+uf/+/rm//v55v/7+Ob/+/jl//v35f/79uT/+/Xj//v14//9+O7////+///////////////////////89uX/5sJJ/9+1G//fuSD/37wi/96/JP/ewif/7+SZ/////////////P7y/+T0f//d713/3uxe/97pW//f5ln/3+JW/9/eU//g2lD/4dZN/+LRSv/jy0b/5MZD/+XBP//luzv/5rY2/+q6S//67dL////////////////////+//DVjP/hrhj/4LEa/+C0HP/gtx7/37ke/+bLUv/8+en/////////////////6/af/9fsQf/Y6T//2OY9/9niOv/a3Tf/29g0/9vUMP/czy3/3cgp/97BJP/fuyD/4LUb/+GvF//iqBP/4qEM/+3BZv/+/Pf////////////67dL/5q8u/+KnEv/hqxb/4a4Y/+GxGv/htyT/9Oav///////////////////////6/en/4PBt/9fpP//Y5j//2eI8/9rdOf/b2Db/29Qy/9zPL//dySv/3sIm/9+8Iv/gth3/4bAZ/+KpFf/jog//5aEY//ffs////////vz4/+7Da//jngv/46IP/+KmEv/iqRT/4asU/+vJYv/+/PX////////////////////////////2+9b/3+5m/9fmPf/Z4jv/2t05/9vYNv/b1DL/3M8v/93JK//ewib/37wi/+C2Hf/hsBn/4qkV/+OjEP/jmwn/67FH//316f/32qv/5psU/+SXBf/jmwn/458L/+KhDP/lrif/+OrG///////////////////////////////////////5/OH/6PCM/93lUf/a3Tv/2tg0/9vUMP/czi3/3cgp/97BJP/fuyD/4LUc/+GvF//iqBL/46IN/+SbCP/llgn/8smD//bWo//xxHb/8cZ5//HHev/wyXz/8Mt8//Xgrv///vv////////////////////////////////////////////+/vr/+fre//Lzuv/u7aD/7OiT/+zlj//t4Yz/7d+K/+7biP/u2Ib/79SD//DRgf/wzn//8cp8//HGeP/zzYz//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=");
 
 /***/ }),
 

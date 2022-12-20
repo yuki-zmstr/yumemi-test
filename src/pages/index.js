@@ -10,6 +10,8 @@ import {
   Label,
 } from "recharts";
 
+import logo from "../../favicon.ico";
+
 function IndexPage() {
   const [responseData, setResponseData] = useState("");
   const [ticker, setTicker] = useState("");
@@ -38,6 +40,9 @@ function IndexPage() {
         fontFamily: '"Lucida Console", Monaco, monospace',
       }}
     >
+      <head className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+      </head>
       <h1
         style={{
           background: "black",
