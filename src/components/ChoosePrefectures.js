@@ -15,19 +15,33 @@ function ChoosePrefectures(props) {
           //   props.setMessage("Error");s
           console.error(error);
         }),
-    []
+    [setPrefectures]
   );
+
+  function checkboxChangeHandler(e) {
+    if (e.target.checked === true) {
+      props.onAddPrefecture(e.target.value);
+    } else {
+      props.onRemovePrefecture(e.target.value);
+    }
+  }
 
   return (
     <form onSubmit={props.draw}>
       <fieldset>
         <legend>都道府県</legend>
-        {prefectures.map(({ prefCode, prefName }) => (
-          <div>
-            <input type="checkbox" id={prefCode} value={prefName} />
-            <label for={prefCode}>{prefName}</label>
-          </div>
-        ))}
+        <div style={{ display: "flex", "flex-wrap": "wrap" }}>
+          {prefectures.map(({ prefCode, prefName }) => (
+            <label key={prefCode}>
+              <input
+                type="checkbox"
+                value={prefCode}
+                onChange={checkboxChangeHandler}
+              />
+              {prefName}
+            </label>
+          ))}
+        </div>
       </fieldset>
       <fieldset>
         <legend>描画</legend>

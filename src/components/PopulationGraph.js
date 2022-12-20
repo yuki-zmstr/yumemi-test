@@ -1,3 +1,4 @@
+import React from "react";
 import {
   LineChart,
   XAxis,
@@ -7,7 +8,6 @@ import {
   YAxis,
   Label,
 } from "recharts";
-import React from "react";
 
 function PopulationGraph(props) {
   return (
