@@ -1,0 +1,18 @@
+.fieldset {
+    max-width: 800px;
+    margin: auto
+}
+
+.container {
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.label {
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.checkbox {
+    transform: scale(1.2)
+}

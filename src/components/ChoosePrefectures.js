@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import { getPrefectures } from "../api";
 
+import {
+  fieldset,
+  container,
+  label,
+  checkbox,
+} from "./ChoosePrefectures.module.css";
+
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
 
@@ -27,22 +34,23 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
 
   return (
     <form onSubmit={draw}>
-      <fieldset>
+      <fieldset className={fieldset}>
         <legend>都道府県</legend>
-        <div style={{ display: "flex", "flex-wrap": "wrap" }}>
+        <div className={container}>
           {prefectures.map(({ prefCode, prefName }) => (
-            <label key={prefCode}>
+            <label key={prefCode} className={label}>
               <input
                 type="checkbox"
                 value={prefCode}
                 onChange={checkboxChangeHandler}
+                className={checkbox}
               />
               {prefName}
             </label>
           ))}
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset className={fieldset}>
         <legend>描画</legend>
         <button type="submit">描画する</button>
       </fieldset>
