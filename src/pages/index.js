@@ -2,11 +2,11 @@ import Header from "../components/Header";
 import Body from "../components/Body";
 import React from "react";
 
-import * as styles from "./index.module.css";
+import { main } from "./index.module.css";
 
 function IndexPage() {
   return (
-    <div className={styles.main}>
+    <div className={main}>
       <Header />
       <Body />
     </div>
