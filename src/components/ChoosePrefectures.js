@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { getPrefectures } from "../api";
 
-function ChoosePrefectures(props) {
+function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
 
   useEffect(
@@ -12,7 +12,6 @@ function ChoosePrefectures(props) {
           setPrefectures(response.data.result);
         })
         .catch((error) => {
-          //   props.setMessage("Error");s
           console.error(error);
         }),
     [setPrefectures]
@@ -20,14 +19,14 @@ function ChoosePrefectures(props) {
 
   function checkboxChangeHandler(e) {
     if (e.target.checked === true) {
-      props.onAddPrefecture(e.target.value);
+      onAddPrefecture(e.target.value);
     } else {
-      props.onRemovePrefecture(e.target.value);
+      onRemovePrefecture(e.target.value);
     }
   }
 
   return (
-    <form onSubmit={props.draw}>
+    <form onSubmit={draw}>
       <fieldset>
         <legend>都道府県</legend>
         <div style={{ display: "flex", "flex-wrap": "wrap" }}>

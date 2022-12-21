@@ -9,16 +9,16 @@ import {
   Label,
 } from "recharts";
 
-function PopulationGraph(props) {
+function PopulationGraph({ result, message }) {
   return (
     <>
-      <p>{props.message}</p>
+      <p>{message}</p>
       <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
 
       <LineChart
         width={900}
         height={500}
-        data={props.result}
+        data={result}
         margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
       >
         <YAxis tickCount={10} type="number" width={80}>

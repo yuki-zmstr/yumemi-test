@@ -2,15 +2,11 @@ import Header from "../components/Header";
 import Body from "../components/Body";
 import React from "react";
 
+import * as styles from "./index.module.css";
+
 function IndexPage() {
   return (
-    <div
-      style={{
-        background: "#EEE",
-        padding: "5%",
-        fontFamily: '"Lucida Console", Monaco, monospace',
-      }}
-    >
+    <div className={styles.main}>
       <Header />
       <Body />
     </div>
