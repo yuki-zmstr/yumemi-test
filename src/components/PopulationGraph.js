@@ -7,9 +7,22 @@ import {
   Tooltip,
   YAxis,
   Label,
+  Legend,
 } from "recharts";
 
 import { container } from "./PopulationGraph.module.css";
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${label} : ${payload[0].value}`}</p>
+        <p className="desc">Anything you want can be displayed here.</p>
+      </div>
+    );
+  }
+  return null;
+};
 
 function PopulationGraph({ result, message }) {
   return (
@@ -20,13 +33,11 @@ function PopulationGraph({ result, message }) {
       <LineChart
         width={1000}
         height={500}
-        data={result}
         margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
       >
         <YAxis tickCount={10} type="number" width={100}>
           <Label value="人口" position="insideLeft" angle={270} />
         </YAxis>
-        <Tooltip />
         <XAxis
           padding={{ left: 5, right: 5 }}
           tickCount={10}
@@ -35,7 +46,16 @@ function PopulationGraph({ result, message }) {
           dataKey="year"
         />
         <CartesianGrid stroke="#f5f5f5" />
-        <Line type="monotone" dataKey="value" stroke="#ff7300" yAxisId={0} />
+        {/* multiple lines. do a map.  prefecture: ... population: ...*/}
+        <Tooltip content={<CustomTooltip />} />
+        <Legend />
+        <Line
+          type="monotone"
+          data={result.population}
+          dataKey="value"
+          stroke="yellow"
+          yAxisId={0}
+        />
       </LineChart>
     </div>
   );
