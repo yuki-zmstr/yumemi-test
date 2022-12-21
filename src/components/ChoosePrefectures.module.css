@@ -1,6 +1,6 @@
-.fieldset {
+.form {
     max-width: 800px;
-    margin: auto
+    margin: auto;
 }
 
 .container {
@@ -15,4 +15,8 @@
 
 .checkbox {
     transform: scale(1.2)
+}
+
+.button {
+    transform: scale(1.5);
 }
