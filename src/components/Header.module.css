@@ -1,6 +1,10 @@
 .header {
     width: 20%;
+    margin: auto;
     text-align: center;
+}
+
+.title {
     background: #000;
     color: #FFF;
     padding: 1rem;
