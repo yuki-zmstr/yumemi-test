@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import { getPrefectures } from "../api";
 
 import {
-  fieldset,
+  form,
   container,
   label,
   checkbox,
+  button,
 } from "./ChoosePrefectures.module.css";
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
@@ -33,8 +34,8 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   }
 
   return (
-    <form onSubmit={draw}>
-      <fieldset className={fieldset}>
+    <form onSubmit={draw} className={form}>
+      <fieldset>
         <legend>都道府県</legend>
         <div className={container}>
           {prefectures.map(({ prefCode, prefName }) => (
@@ -50,10 +51,9 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
           ))}
         </div>
       </fieldset>
-      <fieldset className={fieldset}>
-        <legend>描画</legend>
-        <button type="submit">描画する</button>
-      </fieldset>
+      <button type="submit" className={button}>
+        描画する
+      </button>
     </form>
   );
 }
