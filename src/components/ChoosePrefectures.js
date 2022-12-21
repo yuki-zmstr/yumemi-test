@@ -12,12 +12,14 @@ import {
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
+  const [preLoadMessage, setPreLoadMessage] = useState("Loading...");
 
   useEffect(
     () =>
       getPrefectures()
         .then((response) => {
           setPrefectures(response.data.result);
+          setPreLoadMessage("");
         })
         .catch((error) => {
           console.error(error);
@@ -38,6 +40,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
       <fieldset>
         <legend>都道府県</legend>
         <div className={container}>
+          <p>{preLoadMessage}</p>
           {prefectures.map(({ prefCode, prefName }) => (
             <label key={prefCode} className={label}>
               <input
