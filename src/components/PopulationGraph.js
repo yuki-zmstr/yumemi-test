@@ -51,7 +51,7 @@ function PopulationGraph({ result, message }) {
         <Legend />
         <Line
           type="monotone"
-          data={result.population}
+          data={result?.population}
           dataKey="value"
           stroke="yellow"
           yAxisId={0}
