@@ -9,19 +9,21 @@ import {
   Label,
 } from "recharts";
 
+import { container } from "./PopulationGraph.module.css";
+
 function PopulationGraph({ result, message }) {
   return (
-    <>
+    <div className={container}>
       <p>{message}</p>
       <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
 
       <LineChart
-        width={900}
+        width={1000}
         height={500}
         data={result}
         margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
       >
-        <YAxis tickCount={10} type="number" width={80}>
+        <YAxis tickCount={10} type="number" width={100}>
           <Label value="人口" position="insideLeft" angle={270} />
         </YAxis>
         <Tooltip />
@@ -35,7 +37,7 @@ function PopulationGraph({ result, message }) {
         <CartesianGrid stroke="#f5f5f5" />
         <Line type="monotone" dataKey="value" stroke="#ff7300" yAxisId={0} />
       </LineChart>
-    </>
+    </div>
   );
 }
 
