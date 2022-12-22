@@ -11,8 +11,8 @@ function Body() {
   function buildResponseData(e) {
     e.preventDefault();
     setResponseData([]);
-    setGraphLoadingMessage("Loading...");
-    for (let prefCode in selections) {
+    // setGraphLoadingMessage("Loading...");
+    for (const prefCode of selections) {
       getPopulationData(prefCode).then((response) => {
         setResponseData((prevResponseData) => {
           return [
@@ -26,6 +26,7 @@ function Body() {
 
   function showResponseData(e) {
     e.preventDefault();
+    // console.log(selections);
     console.log(responseData);
   }
 

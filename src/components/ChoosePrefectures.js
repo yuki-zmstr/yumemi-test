@@ -34,9 +34,9 @@ function ChoosePrefectures({
 
   function checkboxChangeHandler(e) {
     if (e.target.checked === true) {
-      onAddPrefecture(e.target.value);
+      onAddPrefecture(parseInt(e.target.value));
     } else {
-      onRemovePrefecture(e.target.value);
+      onRemovePrefecture(parseInt(e.target.value));
     }
   }
 
