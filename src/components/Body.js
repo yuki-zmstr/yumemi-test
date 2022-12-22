@@ -1,27 +1,32 @@
 import React, { useState } from "react";
 import PopulationGraph from "./populationGraph";
 import ChoosePrefectures from "./ChoosePrefectures";
-import { getGraphs } from "../api";
+import { getPopulationData } from "../api";
 
 function Body() {
   const [responseData, setResponseData] = useState([]);
-  const [message, setMessage] = useState("");
+  const [graphLoadingMessage, setGraphLoadingMessage] = useState("");
   const [selections, setSelections] = useState([]);
 
-  function drawGraph(e) {
+  function buildResponseData(e) {
     e.preventDefault();
-    setMessage("Loading...");
-    // for (let prefecture in selections) {
-    //   getGraphs(prefecture)
-    //     .then((response) => {
-    //       setResponseData(response.data.result.data[0].data);
-    //       setMessage("");
-    //     })
-    //     .catch((error) => {
-    //       setMessage("Error");
-    //       console.error(error);
-    //     });
-    // }
+    setResponseData([]);
+    setGraphLoadingMessage("Loading...");
+    for (let prefCode in selections) {
+      getPopulationData(prefCode).then((response) => {
+        setResponseData((prevResponseData) => {
+          return [
+            ...prevResponseData,
+            { pref: prefCode, value: response.data.result.data[0].data },
+          ];
+        });
+      });
+    }
+  }
+
+  function showResponseData(e) {
+    e.preventDefault();
+    console.log(responseData);
   }
 
   function addPrefectureHandler(prefCode) {
@@ -38,11 +43,12 @@ function Body() {
   return (
     <>
       <ChoosePrefectures
-        draw={drawGraph}
+        draw={buildResponseData}
+        onClick={showResponseData}
         onAddPrefecture={addPrefectureHandler}
         onRemovePrefecture={removePrefectureHandler}
       />
-      <PopulationGraph result={responseData} message={message} />
+      <PopulationGraph result={responseData} message={graphLoadingMessage} />
     </>
   );
 }

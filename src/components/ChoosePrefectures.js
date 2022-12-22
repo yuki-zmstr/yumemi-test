@@ -10,7 +10,12 @@ import {
   button,
 } from "./ChoosePrefectures.module.css";
 
-function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
+function ChoosePrefectures({
+  draw,
+  onClick,
+  onAddPrefecture,
+  onRemovePrefecture,
+}) {
   const [prefectures, setPrefectures] = useState([]);
   const [preLoadMessage, setPreLoadMessage] = useState("Loading...");
 
@@ -37,6 +42,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
 
   return (
     <form onSubmit={draw} className={form}>
+      <button onClick={onClick}>hello</button>
       <fieldset>
         <legend>都道府県</legend>
         <div className={container}>
