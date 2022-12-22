@@ -14,10 +14,13 @@ import { container } from "./PopulationGraph.module.css";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
+    console.log(payload);
     return (
       <div className="custom-tooltip">
-        <p className="label">{`${label} : ${payload[0].value}`}</p>
-        <p className="desc">Anything you want can be displayed here.</p>
+        <p className="label">{`${label}`}</p>
+        {payload.map((item) => {
+          return <p className="label">{`${item.name} : ${item.value} 人`}</p>;
+        })}
       </div>
     );
   }
@@ -63,7 +66,16 @@ function PopulationGraph({ result, message }) {
         margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
         data={result}
       >
-        <YAxis tickCount={10} type="number" width={100}>
+        <YAxis
+          tickFormatter={(value) =>
+            new Intl.NumberFormat("en-US", {
+              notation: "compact",
+              compactDisplay: "short",
+            }).format(value)
+          }
+          type="number"
+          width={100}
+        >
           <Label value="人口" position="insideLeft" angle={270} />
         </YAxis>
         <XAxis
@@ -72,8 +84,10 @@ function PopulationGraph({ result, message }) {
           angle={-60}
           height={90}
           dataKey="year"
-        />
-        <CartesianGrid stroke="#f5f5f5" />
+        >
+          <Label value="年度" position="insideBottom" />
+        </XAxis>
+        <CartesianGrid stroke="#ffffff" />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
         {lines(result)}
