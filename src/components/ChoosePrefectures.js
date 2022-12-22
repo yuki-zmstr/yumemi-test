@@ -17,20 +17,24 @@ function ChoosePrefectures({
   onRemovePrefecture,
 }) {
   const [prefectures, setPrefectures] = useState([]);
-  const [preLoadMessage, setPreLoadMessage] = useState("Loading...");
-
-  useEffect(
-    () =>
-      getPrefectures()
-        .then((response) => {
-          setPrefectures(response.data.result);
-          setPreLoadMessage("");
-        })
-        .catch((error) => {
-          console.error(error);
-        }),
-    [setPrefectures]
+  const [preLoadMessage, setPreLoadMessage] = useState(
+    "Loading prefectures..."
   );
+
+  const fetchData = () => {
+    getPrefectures()
+      .then((response) => {
+        setPrefectures(response.data.result);
+        setPreLoadMessage("");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function checkboxChangeHandler(e) {
     if (e.target.checked === true) {
