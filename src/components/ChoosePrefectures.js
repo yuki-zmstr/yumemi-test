@@ -46,7 +46,6 @@ function ChoosePrefectures({
 
   return (
     <form onSubmit={draw} className={form}>
-      <button onClick={onClick}>hello</button>
       <fieldset>
         <legend>都道府県</legend>
         <div className={container}>
