@@ -13,9 +13,10 @@ function Body() {
     setResponseData([]);
     for (const prefCode of selections) {
       getPopulationData(prefCode).then((response) => {
+        let result = response.data.result.data[0].data;
         setResponseData((prevResponseData) => {
           if (prevResponseData.length === 0) {
-            return response.data.result.data[0].data.map((pair) => {
+            return result.map((pair) => {
               return {
                 year: pair.year,
                 [prefCode]: pair.value,
@@ -25,18 +26,13 @@ function Body() {
             return prevResponseData.map((item, index) => {
               return {
                 ...item,
-                [prefCode]: response.data.result.data[0].data[index].value,
+                [prefCode]: result[index].value,
               };
             });
           }
         });
       });
     }
-  }
-
-  function showResponseData(e) {
-    e.preventDefault();
-    // console.log(responseData);
   }
 
   function addPrefectureHandler(prefCode) {
@@ -54,7 +50,6 @@ function Body() {
     <>
       <ChoosePrefectures
         draw={buildResponseData}
-        onClick={showResponseData}
         onAddPrefecture={addPrefectureHandler}
         onRemovePrefecture={removePrefectureHandler}
       />
