@@ -11,14 +11,24 @@ function Body() {
   function buildResponseData(e) {
     e.preventDefault();
     setResponseData([]);
-    // setGraphLoadingMessage("Loading...");
     for (const prefCode of selections) {
       getPopulationData(prefCode).then((response) => {
         setResponseData((prevResponseData) => {
-          return [
-            ...prevResponseData,
-            { pref: prefCode, value: response.data.result.data[0].data },
-          ];
+          if (prevResponseData.length === 0) {
+            return response.data.result.data[0].data.map((pair) => {
+              return {
+                year: pair.year,
+                [prefCode]: pair.value,
+              };
+            });
+          } else {
+            return prevResponseData.map((item, index) => {
+              return {
+                ...item,
+                [prefCode]: response.data.result.data[0].data[index].value,
+              };
+            });
+          }
         });
       });
     }
@@ -26,8 +36,7 @@ function Body() {
 
   function showResponseData(e) {
     e.preventDefault();
-    // console.log(selections);
-    console.log(responseData);
+    // console.log(responseData);
   }
 
   function addPrefectureHandler(prefCode) {
