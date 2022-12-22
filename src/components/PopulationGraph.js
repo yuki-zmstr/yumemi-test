@@ -29,14 +29,22 @@ const getRandomColor = () => {
 };
 
 const lines = (result) => {
-  // for each prefecture allocated, make a line.
-  result.map((prefecture) => {
+  const entries = result.map((option) => {
+    return Object.keys(option);
+  });
+  const flattened = entries.reduce((prev, current) => {
+    prev = prev.concat(current);
+    return prev;
+  }, []);
+  const filtered = flattened.filter((key) => key !== "year");
+  const uniqueKeys = [...new Set(filtered)];
+  return uniqueKeys.map((key) => {
     return (
       <Line
         key={Math.random()}
         type="monotone"
         stroke={getRandomColor()}
-        dataKey="value.value"
+        dataKey={key}
       />
     );
   });
@@ -63,7 +71,7 @@ function PopulationGraph({ result, message }) {
           tickCount={10}
           angle={-60}
           height={90}
-          dataKey="value.year"
+          dataKey="year"
         />
         <CartesianGrid stroke="#f5f5f5" />
         <Tooltip content={<CustomTooltip />} />
