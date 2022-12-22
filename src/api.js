@@ -15,7 +15,7 @@ export function getPrefectures() {
   });
 }
 
-export function getGraphs(prefcode) {
+export function getPopulationData(prefcode) {
   return instance({
     method: "GET",
     url: "api/v1/population/composition/perYear",
