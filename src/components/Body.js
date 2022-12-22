@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PopulationGraph from "./populationGraph";
 import ChoosePrefectures from "./ChoosePrefectures";
 import { getPopulationData } from "../api";
 
 function Body() {
   const [responseData, setResponseData] = useState([]);
-  const [graphLoadingMessage, setGraphLoadingMessage] = useState("");
   const [selections, setSelections] = useState([]);
 
   function buildResponseData(e) {
@@ -53,7 +52,7 @@ function Body() {
         onAddPrefecture={addPrefectureHandler}
         onRemovePrefecture={removePrefectureHandler}
       />
-      <PopulationGraph result={responseData} message={graphLoadingMessage} />
+      <PopulationGraph result={responseData} />
     </>
   );
 }
