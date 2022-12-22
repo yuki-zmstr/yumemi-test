@@ -10,12 +10,7 @@ import {
   button,
 } from "./ChoosePrefectures.module.css";
 
-function ChoosePrefectures({
-  draw,
-  onClick,
-  onAddPrefecture,
-  onRemovePrefecture,
-}) {
+function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
   const [preLoadMessage, setPreLoadMessage] = useState(
     "Loading prefectures..."
@@ -38,14 +33,14 @@ function ChoosePrefectures({
 
   function checkboxChangeHandler(e) {
     if (e.target.checked === true) {
-      onAddPrefecture(parseInt(e.target.value));
+      onAddPrefecture(e.target.value);
     } else {
-      onRemovePrefecture(parseInt(e.target.value));
+      onRemovePrefecture(e.target.value);
     }
   }
 
   return (
-    <form onSubmit={draw} className={form}>
+    <form className={form} onSubmit={draw}>
       <fieldset>
         <legend>都道府県</legend>
         <div className={container}>
