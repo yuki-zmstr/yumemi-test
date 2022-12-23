@@ -50,11 +50,11 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
         return prefCode === code;
       });
       return (
-        <div>
+        <div key={result[0]?.prefCode}>
           <label className={label}>
             <input
               type="checkbox"
-              value={result[0]?.prefCode}
+              value={`${result[0]?.prefCode},${result[0]?.prefName}`}
               onChange={checkboxChangeHandler}
               className={checkbox}
             />
@@ -73,7 +73,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
           <p>{preLoadMessage}</p>
           {Object.keys(regionData).map((key) => {
             return (
-              <div>
+              <div key={key}>
                 <h3 className={region}>{key}</h3>
                 <div className={prefectureSelections}>
                   {filterPrefecture(key)}
