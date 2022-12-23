@@ -17,7 +17,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
-        <p className="label">{`${label}`}</p>
+        <h3 className="label">{`${label}年`}</h3>
         {payload.map((item) => {
           return (
             <p
