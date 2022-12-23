@@ -1,25 +1,15 @@
 import React from 'react';
-import {
-  LineChart,
-  XAxis,
-  CartesianGrid,
-  Line,
-  Tooltip,
-  YAxis,
-  Label,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+import { LineChart, XAxis, CartesianGrid, Line, Tooltip, YAxis, Label, Legend, ResponsiveContainer } from 'recharts';
 
 import { container } from '../stylesheets/PopulationGraph.module.css';
 
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
-      <div className='custom-tooltip'>
-        <h3 className='label'>{`${label}年`}</h3>
+      <div className="custom-tooltip">
+        <h3 className="label">{`${label}年`}</h3>
         {payload.map((item) => (
-          <p className='label' key={item.value}>
+          <p className="label" key={item.value}>
             {`${item.name} : ${item.value} 人`}
           </p>
         ))}
@@ -29,8 +19,7 @@ function CustomTooltip({ active, payload, label }) {
   return null;
 }
 
-const getRandomColor = () =>
-  `#${((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0')}`;
+const getRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 const lines = (result) => {
   const entries = result.map((option) => Object.keys(option));
@@ -40,16 +29,17 @@ const lines = (result) => {
   }, []);
   const filtered = flattened.filter((key) => key !== 'year');
   const uniqueKeys = [...new Set(filtered)];
-  return uniqueKeys.map((key) => (
-    <Line key={key} type='monotone' stroke={getRandomColor()} dataKey={key} />
-  ));
+  return uniqueKeys.map((key) => <Line key={key} type="monotone" stroke={getRandomColor()} dataKey={key} />);
 };
 
 function PopulationGraph({ result, message }) {
   return (
     <div className={container}>
       <p>{message}</p>
-      <h3>最終更新日: {new Date().toJSON().slice(0, 10)}</h3>
+      <h3>
+        最終更新日:
+        {new Date().toJSON().slice(0, 10)}
+      </h3>
 
       <ResponsiveContainer>
         <LineChart
@@ -62,34 +52,22 @@ function PopulationGraph({ result, message }) {
           data={result}
         >
           <YAxis
-            tickFormatter={(value) =>
+            tickFormatter={(value) => {
               new Intl.NumberFormat('en-US', {
                 notation: 'compact',
                 compactDisplay: 'short',
-              }).format(value)
-            }
-            type='number'
+              }).format(value);
+            }}
+            type="number"
             width={100}
-            stroke='black'
+            stroke="black"
           >
-            <Label
-              value='人口'
-              position='insideLeft'
-              angle={270}
-              fill='black'
-            />
+            <Label value="人口" position="insideLeft" angle={270} fill="black" />
           </YAxis>
-          <XAxis
-            padding={{ left: 5, right: 5 }}
-            tickCount={10}
-            angle={-60}
-            height={90}
-            dataKey='year'
-            stroke='black'
-          >
-            <Label value='年度' position='insideBottom' fill='black' />
+          <XAxis padding={{ left: 5, right: 5 }} tickCount={10} angle={-60} height={90} dataKey="year" stroke="black">
+            <Label value="年度" position="insideBottom" fill="black" />
           </XAxis>
-          <CartesianGrid stroke='#ffffff' />
+          <CartesianGrid stroke="#ffffff" />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
           {lines(result)}

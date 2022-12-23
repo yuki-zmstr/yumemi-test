@@ -11,6 +11,8 @@
   },
   "plugins": ["react"],
   "rules": {
-    "jsx-quotes": ["error", "prefer-single"]
+    "jsx-quotes": ["error", "prefer-single"],
+    "implicit-arrow-linebreak": ["error", "beside"]
+    // "arrow-body-style": ["error", "as-needed"]
   }
 }

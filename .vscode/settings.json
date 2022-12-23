@@ -8,10 +8,4 @@
   "eslint.nodePath": "./front/app/node_modules",
   "eslint.packageManager": "yarn",
   "eslint.workingDirectories": ["./front/app"]
-  //   "eslint.validate": [
-  //     {
-  //       "language": "typescript",
-  //       "autoFix": true
-  //     }
-  //   ]
 }

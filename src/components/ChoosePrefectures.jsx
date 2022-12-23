@@ -15,18 +15,16 @@ import {
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
-  const [preLoadMessage, setPreLoadMessage] = useState(
-    'Loading prefectures...'
-  );
+  const [preLoadMessage, setPreLoadMessage] = useState('Loading prefectures...');
 
   const fetchData = () => {
     getPrefectures().then((response) => {
       setPrefectures(response.data.result);
-      response.data.result
-        ? setPreLoadMessage('')
-        : setPreLoadMessage(
-            '都道府県データの取得に失敗しました。API_KEYを再確認してください。'
-          );
+      if (response.data.result) {
+        setPreLoadMessage('');
+      } else {
+        setPreLoadMessage('都道府県データの取得に失敗しました。API_KEYを再確認してください。');
+      }
     });
   };
 
@@ -44,12 +42,13 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
 
   const filterPrefecture = (key) =>
     regionData[key].map((code) => {
-      const result = prefectures.filter(({ prefCode }) => prefCode === code);
+      const result = prefectures?.filter(({ prefCode }) => prefCode === code);
       return (
         <div key={result[0]?.prefCode}>
-          <label className={label}>
+          <label className={label} htmlFor={result[0]?.prefCode}>
             <input
-              type='checkbox'
+              id={result[0]?.prefCode}
+              type="checkbox"
               value={`${result[0]?.prefCode},${result[0]?.prefName}`}
               onChange={checkboxChangeHandler}
               className={checkbox}
@@ -69,14 +68,12 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
           {Object.keys(regionData).map((key) => (
             <div key={key}>
               <h3 className={region}>{key}</h3>
-              <div className={prefectureSelections}>
-                {filterPrefecture(key)}
-              </div>
+              <div className={prefectureSelections}>{filterPrefecture(key)}</div>
             </div>
           ))}
         </div>
       </fieldset>
-      <button type='submit'>描画する</button>
+      <button type="submit">描画する</button>
     </form>
   );
 }

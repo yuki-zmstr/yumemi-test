@@ -10,7 +10,7 @@ function Body() {
   function buildResponseData(e) {
     e.preventDefault();
     setResponseData([]);
-    for (const selection of selections) {
+    selections.forEach((selection) => {
       const [prefCode, prefName] = selection.split(',');
       getPopulationData(prefCode).then((response) => {
         const result = response.data.result.data[0].data;
@@ -27,7 +27,7 @@ function Body() {
           }));
         });
       });
-    }
+    });
   }
 
   function addPrefectureHandler(prefCode) {
@@ -35,9 +35,9 @@ function Body() {
   }
 
   function removePrefectureHandler(prefCode) {
-    setSelections((prevSelections) =>
-      prevSelections.filter((prefecture) => prefecture !== prefCode)
-    );
+    setSelections((prevSelections) => {
+      prevSelections.filter((prefecture) => prefecture !== prefCode);
+    });
   }
   return (
     <>
