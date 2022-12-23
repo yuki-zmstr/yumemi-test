@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import { getPrefectures } from "../api";
 
+import regionData from "../store/regionData";
+
 import {
   form,
-  container,
+  fieldset,
   label,
   checkbox,
-  button,
+  region,
+  prefectureSelections,
 } from "./ChoosePrefectures.module.css";
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
@@ -33,36 +36,54 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
     fetchData();
   }, []);
 
-  function checkboxChangeHandler(e) {
+  const checkboxChangeHandler = (e) => {
     if (e.target.checked === true) {
       onAddPrefecture(e.target.value);
     } else {
       onRemovePrefecture(e.target.value);
     }
-  }
+  };
+
+  const filterPrefecture = (key) => {
+    return regionData[key].map((code) => {
+      const result = prefectures.filter(({ prefCode, prefName }) => {
+        return prefCode === code;
+      });
+      return (
+        <div>
+          <label className={label}>
+            <input
+              type="checkbox"
+              value={result[0]?.prefCode}
+              onChange={checkboxChangeHandler}
+              className={checkbox}
+            />
+            {result[0]?.prefName}
+          </label>
+        </div>
+      );
+    });
+  };
 
   return (
     <form className={form} onSubmit={draw}>
-      <fieldset>
+      <fieldset className={fieldset}>
         <legend>都道府県</legend>
-        <div className={container}>
+        <div>
           <p>{preLoadMessage}</p>
-          {prefectures?.map(({ prefCode, prefName }) => (
-            <label key={prefCode} className={label}>
-              <input
-                type="checkbox"
-                value={prefCode}
-                onChange={checkboxChangeHandler}
-                className={checkbox}
-              />
-              {prefName}
-            </label>
-          ))}
+          {Object.keys(regionData).map((key) => {
+            return (
+              <div>
+                <h3 className={region}>{key}</h3>
+                <div className={prefectureSelections}>
+                  {filterPrefecture(key)}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </fieldset>
-      <button type="submit" className={button}>
-        描画する
-      </button>
+      <button type="submit">描画する</button>
     </form>
   );
 }
