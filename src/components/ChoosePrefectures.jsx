@@ -48,7 +48,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
           <label className={label} htmlFor={result[0]?.prefCode}>
             <input
               id={result[0]?.prefCode}
-              type="checkbox"
+              type='checkbox'
               value={`${result[0]?.prefCode},${result[0]?.prefName}`}
               onChange={checkboxChangeHandler}
               className={checkbox}
@@ -73,7 +73,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
           ))}
         </div>
       </fieldset>
-      <button type="submit">描画する</button>
+      <button type='submit'>描画する</button>
     </form>
   );
 }

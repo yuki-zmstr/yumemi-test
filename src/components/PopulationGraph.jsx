@@ -6,10 +6,10 @@ import { container } from '../stylesheets/PopulationGraph.module.css';
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <h3 className="label">{`${label}年`}</h3>
+      <div className='custom-tooltip'>
+        <h3 className='label'>{`${label}年`}</h3>
         {payload.map((item) => (
-          <p className="label" key={item.value}>
+          <p className='label' key={item.value}>
             {`${item.name} : ${item.value} 人`}
           </p>
         ))}
@@ -29,7 +29,7 @@ const lines = (result) => {
   }, []);
   const filtered = flattened.filter((key) => key !== 'year');
   const uniqueKeys = [...new Set(filtered)];
-  return uniqueKeys.map((key) => <Line key={key} type="monotone" stroke={getRandomColor()} dataKey={key} />);
+  return uniqueKeys.map((key) => <Line key={key} type='monotone' stroke={getRandomColor()} dataKey={key} />);
 };
 
 function PopulationGraph({ result, message }) {
@@ -58,16 +58,16 @@ function PopulationGraph({ result, message }) {
                 compactDisplay: 'short',
               }).format(value);
             }}
-            type="number"
+            type='number'
             width={100}
-            stroke="black"
+            stroke='black'
           >
-            <Label value="人口" position="insideLeft" angle={270} fill="black" />
+            <Label value='人口' position='insideLeft' angle={270} fill='black' />
           </YAxis>
-          <XAxis padding={{ left: 5, right: 5 }} tickCount={10} angle={-60} height={90} dataKey="year" stroke="black">
-            <Label value="年度" position="insideBottom" fill="black" />
+          <XAxis padding={{ left: 5, right: 5 }} tickCount={10} angle={-60} height={90} dataKey='year' stroke='black'>
+            <Label value='年度' position='insideBottom' fill='black' />
           </XAxis>
-          <CartesianGrid stroke="#ffffff" />
+          <CartesianGrid stroke='#ffffff' />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
           {lines(result)}
