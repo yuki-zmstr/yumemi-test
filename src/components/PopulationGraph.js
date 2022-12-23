@@ -8,13 +8,13 @@ import {
   YAxis,
   Label,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 import { container } from "./PopulationGraph.module.css";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    console.log(payload);
     return (
       <div className="custom-tooltip">
         <p className="label">{`${label}`}</p>
@@ -54,44 +54,43 @@ const lines = (result) => {
 };
 
 function PopulationGraph({ result, message }) {
-  console.log(result);
   return (
     <div className={container}>
       <p>{message}</p>
       <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
 
-      <LineChart
-        width={1000}
-        height={500}
-        margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
-        data={result}
-      >
-        <YAxis
-          tickFormatter={(value) =>
-            new Intl.NumberFormat("en-US", {
-              notation: "compact",
-              compactDisplay: "short",
-            }).format(value)
-          }
-          type="number"
-          width={100}
+      <ResponsiveContainer>
+        <LineChart
+          margin={{ top: 50, right: 20, left: 10, bottom: 5 }}
+          data={result}
         >
-          <Label value="人口" position="insideLeft" angle={270} />
-        </YAxis>
-        <XAxis
-          padding={{ left: 5, right: 5 }}
-          tickCount={10}
-          angle={-60}
-          height={90}
-          dataKey="year"
-        >
-          <Label value="年度" position="insideBottom" />
-        </XAxis>
-        <CartesianGrid stroke="#ffffff" />
-        <Tooltip content={<CustomTooltip />} />
-        <Legend />
-        {lines(result)}
-      </LineChart>
+          <YAxis
+            tickFormatter={(value) =>
+              new Intl.NumberFormat("en-US", {
+                notation: "compact",
+                compactDisplay: "short",
+              }).format(value)
+            }
+            type="number"
+            width={100}
+          >
+            <Label value="人口" position="insideLeft" angle={270} />
+          </YAxis>
+          <XAxis
+            padding={{ left: 5, right: 5 }}
+            tickCount={10}
+            angle={-60}
+            height={90}
+            dataKey="year"
+          >
+            <Label value="年度" position="insideBottom" />
+          </XAxis>
+          <CartesianGrid stroke="#ffffff" />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend />
+          {lines(result)}
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }
