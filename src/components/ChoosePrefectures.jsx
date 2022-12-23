@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { getPrefectures } from "../api";
+import { getPrefectures } from '../api';
 
-import regionData from "../utils/regionData";
+import regionData from '../utils/regionData';
 
 import {
   form,
@@ -11,25 +11,23 @@ import {
   checkbox,
   region,
   prefectureSelections,
-} from "../stylesheets/ChoosePrefectures.module.css";
+} from '../stylesheets/ChoosePrefectures.module.css';
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
   const [preLoadMessage, setPreLoadMessage] = useState(
-    "Loading prefectures..."
+    'Loading prefectures...'
   );
 
   const fetchData = () => {
-    getPrefectures()
-      .then((response) => {
-        setPrefectures(response.data.result);
-        response.data.result
-          ? setPreLoadMessage("")
-          : setPreLoadMessage(
-              "都道府県データの取得に失敗しました。API_KEYを再確認してください。"
-            );
-      })
-      .catch((error) => {});
+    getPrefectures().then((response) => {
+      setPrefectures(response.data.result);
+      response.data.result
+        ? setPreLoadMessage('')
+        : setPreLoadMessage(
+            '都道府県データの取得に失敗しました。API_KEYを再確認してください。'
+          );
+    });
   };
 
   useEffect(() => {
@@ -44,16 +42,14 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
     }
   };
 
-  const filterPrefecture = (key) => {
-    return regionData[key].map((code) => {
-      const result = prefectures.filter(({ prefCode, prefName }) => {
-        return prefCode === code;
-      });
+  const filterPrefecture = (key) =>
+    regionData[key].map((code) => {
+      const result = prefectures.filter(({ prefCode }) => prefCode === code);
       return (
         <div key={result[0]?.prefCode}>
           <label className={label}>
             <input
-              type="checkbox"
+              type='checkbox'
               value={`${result[0]?.prefCode},${result[0]?.prefName}`}
               onChange={checkboxChangeHandler}
               className={checkbox}
@@ -63,7 +59,6 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
         </div>
       );
     });
-  };
 
   return (
     <form className={form} onSubmit={draw}>
@@ -71,19 +66,17 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
         <legend>都道府県</legend>
         <div>
           <p>{preLoadMessage}</p>
-          {Object.keys(regionData).map((key) => {
-            return (
-              <div key={key}>
-                <h3 className={region}>{key}</h3>
-                <div className={prefectureSelections}>
-                  {filterPrefecture(key)}
-                </div>
+          {Object.keys(regionData).map((key) => (
+            <div key={key}>
+              <h3 className={region}>{key}</h3>
+              <div className={prefectureSelections}>
+                {filterPrefecture(key)}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </fieldset>
-      <button type="submit">描画する</button>
+      <button type='submit'>描画する</button>
     </form>
   );
 }

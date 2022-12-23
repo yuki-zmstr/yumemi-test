@@ -1,4 +1,3 @@
-// stores prefecture code, name, region, graphColor
 const regionData = {
   北海道: [1],
   東北: [2, 3, 4, 5, 6, 7],
