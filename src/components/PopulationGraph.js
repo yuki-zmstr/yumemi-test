@@ -57,7 +57,7 @@ function PopulationGraph({ result, message }) {
   return (
     <div className={container}>
       <p>{message}</p>
-      <small>最終更新日: {new Date().toJSON().slice(0, 10)}</small>
+      <h3>最終更新日: {new Date().toJSON().slice(0, 10)}</h3>
 
       <ResponsiveContainer>
         <LineChart
@@ -73,8 +73,14 @@ function PopulationGraph({ result, message }) {
             }
             type="number"
             width={100}
+            stroke="black"
           >
-            <Label value="人口" position="insideLeft" angle={270} />
+            <Label
+              value="人口"
+              position="insideLeft"
+              angle={270}
+              fill="black"
+            />
           </YAxis>
           <XAxis
             padding={{ left: 5, right: 5 }}
@@ -82,8 +88,9 @@ function PopulationGraph({ result, message }) {
             angle={-60}
             height={90}
             dataKey="year"
+            stroke="black"
           >
-            <Label value="年度" position="insideBottom" />
+            <Label value="年度" position="insideBottom" fill="black" />
           </XAxis>
           <CartesianGrid stroke="#ffffff" />
           <Tooltip content={<CustomTooltip />} />
