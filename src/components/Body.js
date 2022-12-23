@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PopulationGraph from "./populationGraph";
 import ChoosePrefectures from "./ChoosePrefectures";
 import { getPopulationData } from "../api";
@@ -10,7 +10,8 @@ function Body() {
   function buildResponseData(e) {
     e.preventDefault();
     setResponseData([]);
-    for (const prefCode of selections) {
+    for (const selection of selections) {
+      const [prefCode, prefName] = selection.split(",");
       getPopulationData(prefCode).then((response) => {
         let result = response.data.result.data[0].data;
         setResponseData((prevResponseData) => {
@@ -18,14 +19,14 @@ function Body() {
             return result.map((pair) => {
               return {
                 year: pair.year,
-                [prefCode]: pair.value,
+                [prefName]: pair.value,
               };
             });
           } else {
             return prevResponseData.map((item, index) => {
               return {
                 ...item,
-                [prefCode]: result[index].value,
+                [prefName]: result[index].value,
               };
             });
           }
