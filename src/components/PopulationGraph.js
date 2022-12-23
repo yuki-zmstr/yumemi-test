@@ -19,7 +19,12 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="custom-tooltip">
         <p className="label">{`${label}`}</p>
         {payload.map((item) => {
-          return <p className="label">{`${item.name} : ${item.value} 人`}</p>;
+          return (
+            <p
+              className="label"
+              key={item.value}
+            >{`${item.name} : ${item.value} 人`}</p>
+          );
         })}
       </div>
     );
