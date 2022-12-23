@@ -20,11 +20,13 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
     getPrefectures()
       .then((response) => {
         setPrefectures(response.data.result);
-        setPreLoadMessage("");
+        response.data.result
+          ? setPreLoadMessage("")
+          : setPreLoadMessage(
+              "都道府県データの取得に失敗しました。API_KEYを再確認してください。"
+            );
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -45,7 +47,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
         <legend>都道府県</legend>
         <div className={container}>
           <p>{preLoadMessage}</p>
-          {prefectures.map(({ prefCode, prefName }) => (
+          {prefectures?.map(({ prefCode, prefName }) => (
             <label key={prefCode} className={label}>
               <input
                 type="checkbox"
