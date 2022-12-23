@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -13,7 +13,8 @@
   "rules": {
     "jsx-quotes": [2, "prefer-single"],
     "implicit-arrow-linebreak": ["error", "beside"],
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "prettier/prettier": ["error", { "singleQuote": true, "printWidth": 100 }]
     // "arrow-body-style": ["error", "as-needed"]
   }
 }

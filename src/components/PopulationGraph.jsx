@@ -1,5 +1,15 @@
 import React from 'react';
-import { LineChart, XAxis, CartesianGrid, Line, Tooltip, YAxis, Label, Legend, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  XAxis,
+  CartesianGrid,
+  Line,
+  Tooltip,
+  YAxis,
+  Label,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
 import { container } from '../stylesheets/PopulationGraph.module.css';
 
@@ -29,7 +39,9 @@ const lines = (result) => {
   }, []);
   const filtered = flattened.filter((key) => key !== 'year');
   const uniqueKeys = [...new Set(filtered)];
-  return uniqueKeys.map((key) => <Line key={key} type='monotone' stroke={getRandomColor()} dataKey={key} />);
+  return uniqueKeys.map((key) => (
+    <Line key={key} type='monotone' stroke={getRandomColor()} dataKey={key} />
+  ));
 };
 
 function PopulationGraph({ result, message }) {
@@ -64,7 +76,14 @@ function PopulationGraph({ result, message }) {
           >
             <Label value='人口' position='insideLeft' angle={270} fill='black' />
           </YAxis>
-          <XAxis padding={{ left: 5, right: 5 }} tickCount={10} angle={-60} height={90} dataKey='year' stroke='black'>
+          <XAxis
+            padding={{ left: 5, right: 5 }}
+            tickCount={10}
+            angle={-60}
+            height={90}
+            dataKey='year'
+            stroke='black'
+          >
             <Label value='年度' position='insideBottom' fill='black' />
           </XAxis>
           <CartesianGrid stroke='#ffffff' />
