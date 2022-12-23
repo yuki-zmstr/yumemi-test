@@ -43,12 +43,7 @@ const lines = (result) => {
   const uniqueKeys = [...new Set(filtered)];
   return uniqueKeys.map((key) => {
     return (
-      <Line
-        key={Math.random()}
-        type="monotone"
-        stroke={getRandomColor()}
-        dataKey={key}
-      />
+      <Line key={key} type="monotone" stroke={getRandomColor()} dataKey={key} />
     );
   });
 };
