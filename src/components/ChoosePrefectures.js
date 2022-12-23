@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { getPrefectures } from "../api";
 
-import regionData from "../store/regionData";
+import regionData from "../utils/regionData";
 
 import {
   form,
@@ -11,7 +11,7 @@ import {
   checkbox,
   region,
   prefectureSelections,
-} from "./ChoosePrefectures.module.css";
+} from "../stylesheets/ChoosePrefectures.module.css";
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);

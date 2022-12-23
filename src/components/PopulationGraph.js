@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { container } from "./PopulationGraph.module.css";
+import { container } from "../stylesheets/PopulationGraph.module.css";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {

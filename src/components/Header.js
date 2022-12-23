@@ -1,6 +1,6 @@
 import React from "react";
 
-import { header, title } from "./Header.module.css";
+import { header, title } from "../stylesheets/Header.module.css";
 function Header() {
   return (
     <div className={header}>
