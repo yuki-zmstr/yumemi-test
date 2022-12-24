@@ -35,7 +35,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
     return regionData[key].map((code) => {
       const result = prefectures ? prefectures.filter(({ prefCode }) => prefCode === code) : [];
       return (
-        <div key={result[0]?.prefCode}>
+        <div key={result.length > 0 ? result[0].prefCode : Math.random()}>
           <label className={styles.label} htmlFor={result[0]?.prefCode}>
             <input
               id={result.length > 0 ? result[0].prefCode : ''}
