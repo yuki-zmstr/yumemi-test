@@ -100,13 +100,13 @@ function PopulationGraph({ result, message }) {
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.instanceOf(Array),
-  label: PropTypes.string,
+  label: PropTypes.number,
 };
 
 CustomTooltip.defaultProps = {
   active: false,
   payload: [],
-  label: '',
+  label: 0,
 };
 
 PopulationGraph.propTypes = {
