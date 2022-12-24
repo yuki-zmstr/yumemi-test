@@ -39,7 +39,7 @@ function PopulationGraph({ result, message }) {
       <p>{message}</p>
       <h3>
         最終更新日:
-        {new Date().toJSON().slice(0, 10)}
+        {new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }).slice(0, 10)}
       </h3>
       <LineChart
         margin={{
