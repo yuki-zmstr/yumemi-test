@@ -40,7 +40,7 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
             <input
               id={result.length > 0 ? result[0].prefCode : ''}
               type='checkbox'
-              value={result.length > 0 ? `${result[0]?.prefCode},${result[0]?.prefName}` : ''}
+              value={result.length > 0 ? `${result[0].prefCode},${result[0].prefName}` : ''}
               onChange={checkboxChangeHandler}
               className={styles.checkbox}
             />
