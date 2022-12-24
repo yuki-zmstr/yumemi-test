@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import PropTypes from 'prop-types';
-
 import { getPrefectures } from '../api';
-
 import regionData from '../utils/regionData';
-
 import styles from '../stylesheets/ChoosePrefectures.module.css';
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
@@ -36,15 +32,15 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   };
 
   const filterPrefecture = (key) => {
-    regionData[key].map((code) => {
-      const result = prefectures?.filter(({ prefCode }) => prefCode === code);
+    return regionData[key].map((code) => {
+      const result = prefectures ? prefectures.filter(({ prefCode }) => prefCode === code) : [];
       return (
         <div key={result[0]?.prefCode}>
           <label className={styles.label} htmlFor={result[0]?.prefCode}>
             <input
-              id={result[0]?.prefCode}
+              id={result.length > 0 ? result[0].prefCode : ''}
               type='checkbox'
-              value={`${result[0]?.prefCode},${result[0]?.prefName}`}
+              value={result.length > 0 ? `${result[0]?.prefCode},${result[0]?.prefName}` : ''}
               onChange={checkboxChangeHandler}
               className={styles.checkbox}
             />

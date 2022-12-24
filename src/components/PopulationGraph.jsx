@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {
   LineChart,
   XAxis,
@@ -99,14 +98,25 @@ function PopulationGraph({ result, message }) {
 }
 
 CustomTooltip.propTypes = {
-  active: PropTypes.bool.isRequired,
-  payload: PropTypes.arrayOf.isRequired,
-  label: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  payload: PropTypes.instanceOf(Array),
+  label: PropTypes.string,
+};
+
+CustomTooltip.defaultProps = {
+  active: false,
+  payload: [],
+  label: '',
 };
 
 PopulationGraph.propTypes = {
-  result: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
+  result: PropTypes.instanceOf(Array),
+  message: PropTypes.string,
+};
+
+PopulationGraph.defaultProps = {
+  result: [],
+  message: '',
 };
 
 export default PopulationGraph;
