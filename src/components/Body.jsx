@@ -6,42 +6,48 @@ import { getPopulationData } from '../api';
 function Body() {
   const [responseData, setResponseData] = useState([]);
   const [selections, setSelections] = useState([]);
+  const [graphLoadingMessage, setGraphLoadingMessage] = useState([]);
 
-  function buildResponseData() {
+  const buildResponseData = () => {
     setResponseData([]);
+    setGraphLoadingMessage('Loading graph...');
+    const promises = [];
     selections.forEach((selection) => {
       const [prefCode, prefName] = selection.split(',');
-      getPopulationData(prefCode).then((response) => {
-        const result = response.data.result.data[0].data;
-        setResponseData((prevResponseData) => {
-          if (prevResponseData.length === 0) {
-            return result.map((pair) => ({
-              year: pair.year,
-              [prefName]: pair.value,
+      promises.push(
+        getPopulationData(prefCode).then((response) => {
+          const result = response.data.result.data[0].data;
+          setResponseData((prevResponseData) => {
+            if (prevResponseData.length === 0) {
+              return result.map((pair) => ({
+                year: pair.year,
+                [prefName]: pair.value,
+              }));
+            }
+            return prevResponseData.map((item, index) => ({
+              ...item,
+              [prefName]: result[index].value,
             }));
-          }
-          return prevResponseData.map((item, index) => ({
-            ...item,
-            [prefName]: result[index].value,
-          }));
-        });
-      });
+          });
+        })
+      );
     });
-  }
+    Promise.all(promises).then(() => setGraphLoadingMessage(''));
+  };
 
   useEffect(() => {
     buildResponseData();
   }, [selections]);
 
-  function addPrefectureHandler(prefCode) {
+  const addPrefectureHandler = (prefCode) => {
     setSelections((prevSelections) => [...prevSelections, prefCode]);
-  }
+  };
 
-  function removePrefectureHandler(prefCode) {
+  const removePrefectureHandler = (prefCode) => {
     setSelections((prevSelections) => {
       return prevSelections.filter((prefecture) => prefecture !== prefCode);
     });
-  }
+  };
   return (
     <>
       <ChoosePrefectures
@@ -49,7 +55,7 @@ function Body() {
         onAddPrefecture={(prefCode) => addPrefectureHandler(prefCode)}
         onRemovePrefecture={(prefCode) => removePrefectureHandler(prefCode)}
       />
-      <PopulationGraph result={responseData} />
+      <PopulationGraph result={responseData} message={graphLoadingMessage} />
     </>
   );
 }
