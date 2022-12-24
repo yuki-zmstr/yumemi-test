@@ -4,7 +4,7 @@ import { getPrefectures } from '../api';
 import regionData from '../utils/regionData';
 import styles from '../stylesheets/ChoosePrefectures.module.css';
 
-function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
+function ChoosePrefectures({ onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
   const [preLoadMessage, setPreLoadMessage] = useState('Loading prefectures...');
 
@@ -52,26 +52,22 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   };
 
   return (
-    <form className={styles.form} onSubmit={draw}>
-      <fieldset className={styles.fieldset}>
-        <legend>都道府県</legend>
-        <div>
-          <p>{preLoadMessage}</p>
-          {Object.keys(regionData).map((key) => (
-            <div key={key}>
-              <h3 className={styles.region}>{key}</h3>
-              <div className={styles.prefectureSelections}>{filterPrefecture(key)}</div>
-            </div>
-          ))}
-        </div>
-      </fieldset>
-      <button type='submit'>描画する</button>
-    </form>
+    <fieldset className={styles.fieldset}>
+      <legend>都道府県</legend>
+      <div>
+        <p>{preLoadMessage}</p>
+        {Object.keys(regionData).map((key) => (
+          <div key={key}>
+            <h3 className={styles.region}>{key}</h3>
+            <div className={styles.prefectureSelections}>{filterPrefecture(key)}</div>
+          </div>
+        ))}
+      </div>
+    </fieldset>
   );
 }
 
 ChoosePrefectures.propTypes = {
-  draw: PropTypes.func.isRequired,
   onAddPrefecture: PropTypes.func.isRequired,
   onRemovePrefecture: PropTypes.func.isRequired,
 };

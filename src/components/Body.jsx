@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PopulationGraph from './PopulationGraph';
 import ChoosePrefectures from './ChoosePrefectures';
 import { getPopulationData } from '../api';
@@ -7,8 +7,7 @@ function Body() {
   const [responseData, setResponseData] = useState([]);
   const [selections, setSelections] = useState([]);
 
-  function buildResponseData(e) {
-    e.preventDefault();
+  function buildResponseData() {
     setResponseData([]);
     selections.forEach((selection) => {
       const [prefCode, prefName] = selection.split(',');
@@ -29,6 +28,10 @@ function Body() {
       });
     });
   }
+
+  useEffect(() => {
+    buildResponseData();
+  }, [selections]);
 
   function addPrefectureHandler(prefCode) {
     setSelections((prevSelections) => [...prevSelections, prefCode]);
