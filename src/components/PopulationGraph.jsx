@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   LineChart,
   XAxis,
@@ -11,7 +13,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-import { container } from '../stylesheets/PopulationGraph.module.css';
+import styles from '../stylesheets/PopulationGraph.module.css';
 
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
@@ -46,7 +48,7 @@ const lines = (result) => {
 
 function PopulationGraph({ result, message }) {
   return (
-    <div className={container}>
+    <div className={styles.container}>
       <p>{message}</p>
       <h3>
         最終更新日:
@@ -95,5 +97,16 @@ function PopulationGraph({ result, message }) {
     </div>
   );
 }
+
+CustomTooltip.propTypes = {
+  active: PropTypes.bool.isRequired,
+  payload: PropTypes.arrayOf.isRequired,
+  label: PropTypes.string.isRequired,
+};
+
+PopulationGraph.propTypes = {
+  result: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired,
+};
 
 export default PopulationGraph;

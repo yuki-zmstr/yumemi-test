@@ -42,9 +42,9 @@ function Body() {
   return (
     <>
       <ChoosePrefectures
-        draw={buildResponseData}
-        onAddPrefecture={addPrefectureHandler}
-        onRemovePrefecture={removePrefectureHandler}
+        draw={() => buildResponseData}
+        onAddPrefecture={() => addPrefectureHandler}
+        onRemovePrefecture={() => removePrefectureHandler}
       />
       <PopulationGraph result={responseData} />
     </>

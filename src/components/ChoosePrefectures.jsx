@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { getPrefectures } from '../api';
 
 import regionData from '../utils/regionData';
 
-import {
-  form,
-  fieldset,
-  label,
-  checkbox,
-  region,
-  prefectureSelections,
-} from '../stylesheets/ChoosePrefectures.module.css';
+import styles from '../stylesheets/ChoosePrefectures.module.css';
 
 function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
   const [prefectures, setPrefectures] = useState([]);
@@ -40,35 +35,36 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
     }
   };
 
-  const filterPrefecture = (key) =>
+  const filterPrefecture = (key) => {
     regionData[key].map((code) => {
       const result = prefectures?.filter(({ prefCode }) => prefCode === code);
       return (
         <div key={result[0]?.prefCode}>
-          <label className={label} htmlFor={result[0]?.prefCode}>
+          <label className={styles.label} htmlFor={result[0]?.prefCode}>
             <input
               id={result[0]?.prefCode}
               type='checkbox'
               value={`${result[0]?.prefCode},${result[0]?.prefName}`}
               onChange={checkboxChangeHandler}
-              className={checkbox}
+              className={styles.checkbox}
             />
             {result[0]?.prefName}
           </label>
         </div>
       );
     });
+  };
 
   return (
-    <form className={form} onSubmit={draw}>
-      <fieldset className={fieldset}>
+    <form className={styles.form} onSubmit={draw}>
+      <fieldset className={styles.fieldset}>
         <legend>都道府県</legend>
         <div>
           <p>{preLoadMessage}</p>
           {Object.keys(regionData).map((key) => (
             <div key={key}>
-              <h3 className={region}>{key}</h3>
-              <div className={prefectureSelections}>{filterPrefecture(key)}</div>
+              <h3 className={styles.region}>{key}</h3>
+              <div className={styles.prefectureSelections}>{filterPrefecture(key)}</div>
             </div>
           ))}
         </div>
@@ -77,5 +73,11 @@ function ChoosePrefectures({ draw, onAddPrefecture, onRemovePrefecture }) {
     </form>
   );
 }
+
+ChoosePrefectures.propTypes = {
+  draw: PropTypes.func.isRequired,
+  onAddPrefecture: PropTypes.func.isRequired,
+  onRemovePrefecture: PropTypes.func.isRequired,
+};
 
 export default ChoosePrefectures;
