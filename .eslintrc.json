@@ -3,12 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "airbnb",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -16,9 +11,10 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "jsx-quotes": [2, "prefer-single"],
+    "jsx-quotes": ["error", "prefer-single"],
     "implicit-arrow-linebreak": ["error", "beside"],
     "no-param-reassign": 0,
+    "arrow-body-style": 0,
     "prettier/prettier": [
       "error",
       { "singleQuote": true, "jsxSingleQuote": true, "printWidth": 100 }
