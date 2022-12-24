@@ -17,12 +17,10 @@ import styles from '../stylesheets/PopulationGraph.module.css';
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
-      <div className='custom-tooltip'>
-        <h3 className='label'>{`${label}年`}</h3>
+      <div className={styles.customTooltip}>
+        <h3>{`${label}年`}</h3>
         {payload.map((item) => (
-          <p className='label' key={item.value}>
-            {`${item.name} : ${item.value} 人`}
-          </p>
+          <p key={item.value}>{`${item.name} : ${item.value} 人`}</p>
         ))}
       </div>
     );
