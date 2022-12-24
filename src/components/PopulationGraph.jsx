@@ -66,7 +66,7 @@ function PopulationGraph({ result, message }) {
         >
           <YAxis
             tickFormatter={(value) => {
-              new Intl.NumberFormat('en-US', {
+              return new Intl.NumberFormat('en-US', {
                 notation: 'compact',
                 compactDisplay: 'short',
               }).format(value);
