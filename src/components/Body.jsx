@@ -36,15 +36,15 @@ function Body() {
 
   function removePrefectureHandler(prefCode) {
     setSelections((prevSelections) => {
-      prevSelections.filter((prefecture) => prefecture !== prefCode);
+      return prevSelections.filter((prefecture) => prefecture !== prefCode);
     });
   }
   return (
     <>
       <ChoosePrefectures
-        draw={() => buildResponseData}
-        onAddPrefecture={() => addPrefectureHandler}
-        onRemovePrefecture={() => removePrefectureHandler}
+        draw={(e) => buildResponseData(e)}
+        onAddPrefecture={(prefCode) => addPrefectureHandler(prefCode)}
+        onRemovePrefecture={(prefCode) => removePrefectureHandler(prefCode)}
       />
       <PopulationGraph result={responseData} />
     </>
