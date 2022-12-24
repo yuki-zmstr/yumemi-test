@@ -1,16 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  LineChart,
-  XAxis,
-  CartesianGrid,
-  Line,
-  Tooltip,
-  YAxis,
-  Label,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+import { LineChart, XAxis, CartesianGrid, Line, Tooltip, YAxis, Label, Legend } from 'recharts';
 
 import styles from '../stylesheets/PopulationGraph.module.css';
 
@@ -51,8 +41,7 @@ function PopulationGraph({ result, message }) {
         最終更新日:
         {new Date().toJSON().slice(0, 10)}
       </h3>
-
-      <ResponsiveContainer>
+      <div className={styles.lineChart}>
         <LineChart
           margin={{
             top: 50,
@@ -61,6 +50,8 @@ function PopulationGraph({ result, message }) {
             bottom: 5,
           }}
           data={result}
+          width={1200}
+          height={600}
         >
           <YAxis
             tickFormatter={(value) => {
@@ -90,7 +81,7 @@ function PopulationGraph({ result, message }) {
           <Legend />
           {lines(result)}
         </LineChart>
-      </ResponsiveContainer>
+      </div>
     </div>
   );
 }

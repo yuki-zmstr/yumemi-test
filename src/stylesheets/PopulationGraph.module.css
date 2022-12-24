@@ -4,6 +4,12 @@
   margin: 50px auto;
 }
 
+.lineChart {
+  width: '100%';
+  padding-top: '5%';
+  margin: 'auto';
+}
+
 .customTooltip {
   background-color: white;
   padding: 5px;
