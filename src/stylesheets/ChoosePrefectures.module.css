@@ -6,7 +6,7 @@
 }
 
 .fieldset {
-  max-width: 850px;
+  max-width: 860px;
 }
 
 .region {
@@ -26,6 +26,7 @@
 
 .checkbox {
   transform: scale(1.4);
+  margin-right: 5px;
 }
 
 button {
