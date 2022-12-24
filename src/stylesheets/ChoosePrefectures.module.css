@@ -34,3 +34,17 @@ button {
   margin-top: 40px;
   width: 100px;
 }
+
+@media (max-width: 767px) {
+  .region {
+    margin-bottom: 2px;
+  }
+
+  .label {
+    font-size: 21px;
+  }
+
+  button {
+    margin-top: 30px;
+  }
+}

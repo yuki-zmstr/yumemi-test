@@ -41,47 +41,45 @@ function PopulationGraph({ result, message }) {
         最終更新日:
         {new Date().toJSON().slice(0, 10)}
       </h3>
-      <div className={styles.lineChart}>
-        <LineChart
-          margin={{
-            top: 50,
-            right: 20,
-            left: 10,
-            bottom: 5,
+      <LineChart
+        margin={{
+          top: 50,
+          right: 10,
+          left: 10,
+          bottom: 5,
+        }}
+        data={result}
+        width={800}
+        height={600}
+      >
+        <YAxis
+          tickFormatter={(value) => {
+            return new Intl.NumberFormat('en-US', {
+              notation: 'compact',
+              compactDisplay: 'short',
+            }).format(value);
           }}
-          data={result}
-          width={1200}
-          height={600}
+          type='number'
+          width={100}
+          stroke='black'
         >
-          <YAxis
-            tickFormatter={(value) => {
-              return new Intl.NumberFormat('en-US', {
-                notation: 'compact',
-                compactDisplay: 'short',
-              }).format(value);
-            }}
-            type='number'
-            width={100}
-            stroke='black'
-          >
-            <Label value='人口' position='insideLeft' angle={270} fill='black' />
-          </YAxis>
-          <XAxis
-            padding={{ left: 5, right: 5 }}
-            tickCount={10}
-            angle={-60}
-            height={90}
-            dataKey='year'
-            stroke='black'
-          >
-            <Label value='年度' position='insideBottom' fill='black' />
-          </XAxis>
-          <CartesianGrid stroke='#ffffff' />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
-          {lines(result)}
-        </LineChart>
-      </div>
+          <Label value='人口' position='insideLeft' angle={270} fill='black' />
+        </YAxis>
+        <XAxis
+          padding={{ left: 5, right: 5 }}
+          tickCount={10}
+          angle={-60}
+          height={90}
+          dataKey='year'
+          stroke='black'
+        >
+          <Label value='年度' position='insideBottom' fill='black' />
+        </XAxis>
+        <CartesianGrid stroke='#ffffff' />
+        <Tooltip content={<CustomTooltip />} />
+        <Legend />
+        {lines(result)}
+      </LineChart>
     </div>
   );
 }

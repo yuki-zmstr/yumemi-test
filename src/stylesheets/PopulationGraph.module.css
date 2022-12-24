@@ -1,16 +1,15 @@
 .container {
   width: 60%;
-  height: 500px;
   margin: 50px auto;
-}
-
-.lineChart {
-  width: '100%';
-  padding-top: '5%';
-  margin: 'auto';
 }
 
 .customTooltip {
   background-color: white;
   padding: 5px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    margin: 50px 0;
+  }
 }
