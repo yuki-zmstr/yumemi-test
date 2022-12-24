@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: 'https://opendata.resas-portal.go.jp',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
-    'X-API-KEY': process.env.API_KEY,
+    'X-API-KEY': process.env.REACT_APP_API_KEY,
   },
 });
 
