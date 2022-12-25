@@ -27,7 +27,9 @@ npm start
 
 ```bash
 npm format
+npm format-test #修正せずテストだけしたい場合
 npm lint
+npm lint-test #修正せずテストだけしたい場合
 ```
 
 ## テスト
@@ -47,4 +49,4 @@ npm test
 
 ## 最後に一言
 
-凄く楽しんで取り組めました！favicon も御社のものを使わせて頂きました。　- 高橋
+- 凄く楽しんで取り組めました！favicon も御社のものを使わせて頂きました。　- 高橋
