@@ -10,7 +10,7 @@ function CustomTooltip({ active, payload, label }) {
       <div className={styles.customTooltip}>
         <h3>{`${label}年`}</h3>
         {payload.map((item) => (
-          <p key={item.value}>{`${item.name} : ${item.value} 人`}</p>
+          <p key={item.value} style={{ color: item.stroke }}>{`${item.name} : ${item.value} 人`}</p>
         ))}
       </div>
     );
