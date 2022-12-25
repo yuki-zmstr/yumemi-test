@@ -46,7 +46,7 @@ npm test
 
 ## 難しかった点
 
-1. eslint の rule の中で、`"arrow-body-style": 0` 　にしないと map の中にあるべき return が自動的に消される。
+1. eslint の rule の中で、`"arrow-body-style": 0` 　にしないと `map(()=>{return ...})` の中にあるべき `return` が自動的に消される。
 
 ## 最後に一言
 
