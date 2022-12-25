@@ -51,7 +51,6 @@ function Body() {
   return (
     <>
       <ChoosePrefectures
-        draw={(e) => buildResponseData(e)}
         onAddPrefecture={(prefCode) => addPrefectureHandler(prefCode)}
         onRemovePrefecture={(prefCode) => removePrefectureHandler(prefCode)}
       />
