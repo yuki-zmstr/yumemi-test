@@ -3,6 +3,10 @@
   margin: 50px auto;
 }
 
+.lineChart {
+  height: 500px;
+}
+
 .customTooltip {
   background-color: white;
   padding: 5px;
