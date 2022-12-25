@@ -6,7 +6,7 @@ import { getPopulationData } from '../api';
 function Body() {
   const [responseData, setResponseData] = useState([]);
   const [selections, setSelections] = useState([]);
-  const [graphLoadingMessage, setGraphLoadingMessage] = useState([]);
+  const [graphLoadingMessage, setGraphLoadingMessage] = useState('');
 
   const buildResponseData = () => {
     setResponseData([]);
