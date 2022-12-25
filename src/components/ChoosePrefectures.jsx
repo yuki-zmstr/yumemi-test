@@ -68,8 +68,13 @@ function ChoosePrefectures({ onAddPrefecture, onRemovePrefecture }) {
 }
 
 ChoosePrefectures.propTypes = {
-  onAddPrefecture: PropTypes.func.isRequired,
-  onRemovePrefecture: PropTypes.func.isRequired,
+  onAddPrefecture: PropTypes.func,
+  onRemovePrefecture: PropTypes.func,
+};
+
+ChoosePrefectures.defaultProps = {
+  onAddPrefecture: () => {},
+  onRemovePrefecture: () => {},
 };
 
 export default ChoosePrefectures;
