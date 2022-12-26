@@ -7,11 +7,6 @@
   height: 500px;
 }
 
-.customTooltip {
-  background-color: white;
-  padding: 5px;
-}
-
 @media (max-width: 767px) {
   .container {
     width: 100%;

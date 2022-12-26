@@ -4,7 +4,6 @@ import {
   LineChart,
   XAxis,
   CartesianGrid,
-  Line,
   Tooltip,
   YAxis,
   Label,
@@ -12,36 +11,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+import CustomTooltip from './graphUtils/CustomTooltip';
+import Lines from './graphUtils/Lines';
 import styles from '../stylesheets/PopulationGraph.module.css';
-
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.customTooltip}>
-        <h3>{`${label}年`}</h3>
-        {payload.map((item) => (
-          <p key={item.value} style={{ color: item.stroke }}>{`${item.name} : ${item.value} 人`}</p>
-        ))}
-      </div>
-    );
-  }
-  return null;
-};
-
-const getRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-
-const lines = (result) => {
-  const entries = result.map((option) => Object.keys(option));
-  const flattened = entries.reduce((prev, current) => {
-    prev = prev.concat(current);
-    return prev;
-  }, []);
-  const filtered = flattened.filter((key) => key !== 'year');
-  const uniqueKeys = [...new Set(filtered)];
-  return uniqueKeys.map((key) => (
-    <Line key={key} type='monotone' stroke={getRandomColor()} dataKey={key} />
-  ));
-};
 
 const PopulationGraph = ({ result, message }) => {
   return (
@@ -91,24 +63,12 @@ const PopulationGraph = ({ result, message }) => {
             <CartesianGrid stroke='#ffffff' />
             <Tooltip content={<CustomTooltip />} />
             <Legend />
-            {lines(result)}
+            {Lines(result)}
           </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
-};
-
-CustomTooltip.propTypes = {
-  active: PropTypes.bool,
-  payload: PropTypes.instanceOf(Array),
-  label: PropTypes.number,
-};
-
-CustomTooltip.defaultProps = {
-  active: false,
-  payload: [],
-  label: 0,
 };
 
 PopulationGraph.propTypes = {
