@@ -38,6 +38,11 @@ npm lint-test #修正せずテストだけしたい場合
 npm test
 ```
 
+## 詰まった点
+
+1. api の呼び出しのテストコードを書くところで詰まっています。詳しくは `ChoosePrefectures.test.jsx` 内にコメントを残しています。
+   → ぜひ相談させてください！勉強したいので。
+
 ## 改善点
 
 1. 地方ごとに、Select All ボタンと Clear All ボタンを追加。
