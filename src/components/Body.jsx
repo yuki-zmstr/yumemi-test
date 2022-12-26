@@ -3,7 +3,7 @@ import PopulationGraph from './PopulationGraph';
 import ChoosePrefectures from './ChoosePrefectures';
 import { getPopulationData } from '../api';
 
-function Body() {
+const Body = () => {
   const [responseData, setResponseData] = useState([]);
   const [selections, setSelections] = useState([]);
   const [graphLoadingMessage, setGraphLoadingMessage] = useState('');
@@ -57,6 +57,6 @@ function Body() {
       <PopulationGraph result={responseData} message={graphLoadingMessage} />
     </>
   );
-}
+};
 
 export default Body;

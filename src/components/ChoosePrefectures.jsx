@@ -4,7 +4,7 @@ import { getPrefectures } from '../api';
 import regionData from '../utils/regionData';
 import styles from '../stylesheets/ChoosePrefectures.module.css';
 
-function ChoosePrefectures({ onAddPrefecture, onRemovePrefecture }) {
+const ChoosePrefectures = ({ onAddPrefecture, onRemovePrefecture }) => {
   const [prefectures, setPrefectures] = useState([]);
   const [preLoadMessage, setPreLoadMessage] = useState('Loading prefectures...');
 
@@ -65,7 +65,7 @@ function ChoosePrefectures({ onAddPrefecture, onRemovePrefecture }) {
       </div>
     </fieldset>
   );
-}
+};
 
 ChoosePrefectures.propTypes = {
   onAddPrefecture: PropTypes.func,

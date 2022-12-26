@@ -4,13 +4,13 @@ import Body from './components/Body';
 
 import styles from './stylesheets/index.module.css';
 
-function App() {
+const App = () => {
   return (
     <div className={styles.main}>
       <Header />
       <Body />
     </div>
   );
-}
+};
 
 export default App;

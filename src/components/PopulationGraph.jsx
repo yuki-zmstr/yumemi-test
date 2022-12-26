@@ -14,7 +14,7 @@ import {
 
 import styles from '../stylesheets/PopulationGraph.module.css';
 
-function CustomTooltip({ active, payload, label }) {
+const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className={styles.customTooltip}>
@@ -26,7 +26,7 @@ function CustomTooltip({ active, payload, label }) {
     );
   }
   return null;
-}
+};
 
 const getRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
@@ -43,7 +43,7 @@ const lines = (result) => {
   ));
 };
 
-function PopulationGraph({ result, message }) {
+const PopulationGraph = ({ result, message }) => {
   return (
     <div className={styles.container}>
       <p>{message}</p>
@@ -97,7 +97,7 @@ function PopulationGraph({ result, message }) {
       </div>
     </div>
   );
-}
+};
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
