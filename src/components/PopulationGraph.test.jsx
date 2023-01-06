@@ -11,7 +11,7 @@ jest.mock('recharts', () => ({
 describe('PopulationGraph', () => {
   it('checks the value of last updated date', () => {
     const { getByText } = render(<PopulationGraph />);
-    const today = new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }).slice(0, 10);
+    const today = new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Tokyo' });
     const h3value = getByText(`最終更新日:${today}`);
     expect(h3value).toBeInTheDocument();
   });

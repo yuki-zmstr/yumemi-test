@@ -21,7 +21,7 @@ const PopulationGraph = ({ result, message }) => {
       <p>{message}</p>
       <h3>
         最終更新日:
-        {new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }).slice(0, 10)}
+        {new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Tokyo' })}
       </h3>
 
       <div data-testid='line-chart' className={styles.lineChart}>
